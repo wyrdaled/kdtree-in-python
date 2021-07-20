@@ -85,29 +85,6 @@ def build_kdtree(points, depth=0):
         'right': build_kdtree(sorted_points[n // 2 + 1:], depth + 1)
     }
 
-
-def kdtree_naive_closest_point(root, point, depth=0, best=None):
-    if root is None:
-        return best
-
-    axis = depth % k
-
-    next_best = None
-    next_branch = None
-
-    if best is None or distance_squared(point, best) > distance_squared(point, root['point']):
-        next_best = root['point']
-    else:
-        next_best = best
-
-    if point[axis] < root['point'][axis]:
-        next_branch = root['left']
-    else:
-        next_branch = root['right']
-
-    return kdtree_naive_closest_point(next_branch, point, depth + 1, next_best)
-
-
 def closer_distance(pivot, p1, p2):
     if p1 is None:
         return p2
