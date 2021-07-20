@@ -140,18 +140,10 @@ def kdtree_closest_point(root, point, depth=0):
         next_branch = root['right']
         opposite_branch = root['left']
 
-    best = closer_distance(point,
-                           kdtree_closest_point(next_branch,
-                                                point,
-                                                depth + 1),
-                           root['point'])
+    best = closer_distance(point, kdtree_closest_point(next_branch,point,depth + 1), root['point'])
 
     if distance_squared(point, best) > (point[axis] - root['point'][axis]) ** 2:
-        best = closer_distance(point,
-                               kdtree_closest_point(opposite_branch,
-                                                    point,
-                                                    depth + 1),
-                               best)
+        best = closer_distance(point, kdtree_closest_point(opposite_branch,point,depth + 1),best)
 
     return best
 
